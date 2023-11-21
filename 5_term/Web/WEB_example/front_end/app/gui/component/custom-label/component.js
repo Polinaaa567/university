@@ -1,7 +1,6 @@
-import template from './template.js'
+import template from './template.js';
 
-import { CounterFactory } from "../../../domain/counter";
-import { UserFactory } from "../../../domain/user";
+import {StatusFactory, QCounterFactory, ECounterFactory, DCounterFactory, PCounterFactory, UserFactory } from "../../../domain/index.js";
 
 class CustomLabel extends HTMLElement {
     
@@ -9,13 +8,20 @@ class CustomLabel extends HTMLElement {
    console.log('constructor Custom-label...');  
    super();
    
-   let counter = CounterFactory.createInstance();
+   let counterQ = QCounterFactory.createInstance();
+   let counterD = DCounterFactory.createInstance();
+   let counterP = PCounterFactory.createInstance();
+   let counterE = ECounterFactory.createInstance();
+   
+   let quantityTasksV = counterQ.getQuantityTasks();
+   let doneTasksV = counterD.getDoneTasks();
+   let performTasksV = counterP.getPerformTasks();
+   let emptyTasksV = counterE.getEmptyTasks();
 
-   let quantityTasksV = counter.getQuantityTasks();
-   let doneTasksV = counter.getDoneTasks();
-   let performTasksV = counter.getPerformTasks();
-   let emptyTasksV = counter.getEmptyTasks();
-   counter.subscribe(this._listenerCounter.bind(this));
+   counterQ.subscribe(this._listenerQuantityTasks.bind(this));
+   counterD.subscribe(this._listenerDoneTasks.bind(this));
+   counterP.subscribe(this._listenerPerformTasks.bind(this));
+   counterE.subscribe(this._listenerEmptyTasks.bind(this));
    
    let user = UserFactory.createInstance();
    let u = user.getUserName();
@@ -27,7 +33,7 @@ class CustomLabel extends HTMLElement {
    this._performTasks = performTasksV;
    this._emptyTasks = emptyTasksV;
 
-   this._xUser = u;    
+   this._userName = u;    
    this.attachShadow({ mode: 'open' });         
  }
 
@@ -43,6 +49,8 @@ class CustomLabel extends HTMLElement {
  static get observedAttributes() {
    return ['x-user','quantity-value', 'done-value', 'perform-value', 'empty-value']; 
 }                    
+
+// 
 
  attributeChangedCallback(name, oldValue, newValue) {
    console.log('attributeChangedCallback custom-label...');  
@@ -60,7 +68,7 @@ class CustomLabel extends HTMLElement {
         this.performTasks = newValue;
       }
       if (name==='empty-value') {       
-        this.performTasks = newValue;
+        this.emptyTasks = newValue;
       }
    }
  }
@@ -107,22 +115,22 @@ class CustomLabel extends HTMLElement {
  get emptyTasks () {
     return this._emptyTasks ;
  } 
-    
- _listenerQuantityTasks(state) {   
-   this.quantityTasks = state;     
- } 
  
- _listenerDoneTasks(state) {   
-    this.doneTasks = state;     
-  }
+ _listenerQuantityTasks(state) { 
+  this.quantityTasks = state;    
+} 
 
-  _listenerPerformTasks(state) {   
-    this.performTasks = state;     
-  }
+_listenerDoneTasks(state) { 
+  this.doneTasks = state;    
+}
 
-  _listenerEmptyTasks(state) {   
-    this.emptyTasks = state;     
-  }
+_listenerPerformTasks(state) {  
+  this.performTasks = state;  
+}
+
+_listenerEmptyTasks(state) {   
+  this.emptyTasks = state;
+}
 
  _listenerUser(state) {   
    this.userName = state;     

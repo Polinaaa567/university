@@ -1,3 +1,1 @@
-import { RouterFactory } from "./RouterFactory.js";
-
-export {RouterFactory};
+export { RouterFactory } from "./RouterFactory.js";

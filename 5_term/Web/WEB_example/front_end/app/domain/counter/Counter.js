@@ -9,7 +9,7 @@ export class Counter extends Store {
       this._performTasks = 0;
       this._emptyTasks = 0;
     }
-  
+  // QuantityTasks
     getQuantityTasks() {
       return this._quantityTasks;
     }
@@ -19,11 +19,12 @@ export class Counter extends Store {
       super._emit(this._quantityTasks);
     }
 
-    decreaseQuantityTasks() {
-        this._quantityTasks -= 1;
-        super._emit(this._quantityTasks);
-    }
+    // decreaseQuantityTasks() {
+    //     this._quantityTasks -= 1;
+    //     super._emit(this._quantityTasks);
+    // }
 
+    // doneTasks
     getDoneTasks() {
       return this._doneTasks;
     }
@@ -38,6 +39,7 @@ export class Counter extends Store {
         super._emit(this._doneTasks);
     }    
 
+    // performTasks
     getPerformTasks() {
       return this._performTasks;
     }
