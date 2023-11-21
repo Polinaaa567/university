@@ -1,0 +1,5 @@
+back-end/app/0_generate.bat
+back-end/app/mvn-start/target/
+
+front_end/app/dist/
+front_end/app/node_modules/
