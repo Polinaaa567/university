@@ -1,7 +1,5 @@
 import { ApiServiceFactory } from "../../api/ApiServiceFactory.js";
 
-import "../../component/custom-button/component.js";
-import "../../component/custom-input/component.js";
 
 import template from "./template.js";
 
@@ -54,18 +52,18 @@ class DatabaseExample extends HTMLElement {
 
   // для добавления полей в div
   async renderDocument(article, index, Node) {
-    let number = document.createElement("p");
+    let number = document.createElement("h1");
     let titleElement = document.createElement("p");
     let authorElement = document.createElement("p");
     let date = document.createElement("p");
-    let br = document.createElement("br");
+    let hr = document.createElement("hr");
 
     number.textContent = `Статья № ${index + 1}`;
     titleElement.textContent = `Название статьи: ${article.title}`;
     authorElement.textContent = `Автор(ы): ${article.author.join(", ")}`;
     date.textContent = `Дата размещения: ${article.data} \n\n`;
 
-    Node.append(number, titleElement, authorElement, date, br);
+    Node.append(number, titleElement, authorElement, date, hr);
   }
 
   // для показа документов
@@ -78,7 +76,7 @@ class DatabaseExample extends HTMLElement {
     let result = this.shadowRoot.childNodes[5];
     result.textContent = '';
     
-    this.shadowRoot.childNodes[3].childNodes[3].xValue = '';
+    this.shadowRoot.childNodes[3].childNodes[3].value = '';
     try {
       let collection = await this._fetchCollection();
       console.log(collection);
@@ -102,7 +100,7 @@ class DatabaseExample extends HTMLElement {
       result.textContent = '';
 
       collection.forEach((article, index) => {
-        let searchtitle = this.shadowRoot.childNodes[3].childNodes[3].xValue.toLowerCase();
+        let searchtitle = this.shadowRoot.childNodes[3].childNodes[3].value.toLowerCase();
         console.log(searchtitle);
         let {title} = article;
        
@@ -125,7 +123,7 @@ class DatabaseExample extends HTMLElement {
       
       let result = this.shadowRoot.childNodes[5];
       result.textContent = '';
-      this.shadowRoot.childNodes[3].childNodes[3].xValue = '';
+      this.shadowRoot.childNodes[3].childNodes[3].value = '';
 
       collection.forEach((article, index) => {
         let searchAuthor = this.shadowRoot.childNodes[3].childNodes[7].value.toLowerCase();

@@ -5,6 +5,14 @@ const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://127.0.0.1:27017/lab9_article");
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Accept, Token");
+  next();
+});
+
 app.get("/articles", async (req, res) => {
   try {
     const articles = await Article.find().exec();

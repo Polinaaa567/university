@@ -28,13 +28,41 @@ export default function () {
    select option {
     padding: 30px;
   }
+  button {
+    margin:20px auto;
+    color: #FFFFFF;
+    font: bold 21px arial;
+    height: 35px auto;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+
+    width: 160px auto;
+        background: linear-gradient(to bottom, #209DCA, #0F84AF);
+    transition: all 0.5s linear 0s;
+        border-radius: 4px;
+  }
+
+  input {
+    margin:20px auto;
+    color: #FFFFFF;
+    font: bold 21px arial;
+    height: 35px auto;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    width: 160px auto;
+    background: linear-gradient(to bottom, #1ca9c9, #0F84AF);
+    transition: all 0.5s linear 0s;
+    border-radius: 4px;
+  }
   </style>
     <div class="divCell">
-    <custom-button class="button-margin">список статей</custom-button>     
-    <custom-input class="input-margin"></custom-input>
-    <custom-button class="button-margin">Поиск по названию</custom-button>     
+    <button class="button-margin">список статей</button>     
+    <input class="input-margin"></input>
+    <button class="button-margin">Поиск по названию</button>     
     <select ></select class="input-margin">
-    <custom-button>Поиск по автору</custom-button>
+    <button>Поиск по автору</button>
     </div>
     <div></div>
 `;
