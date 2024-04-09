@@ -1,20 +1,18 @@
 package local.arch.application.service;
 
-import local.arch.domain.ICalculator;
-
 import java.util.Map;
 
 import local.arch.application.IService;
 import local.arch.application.IStorage;
 import local.arch.application.IStorageUsing;
 import local.arch.domain.Factory;
+import local.arch.domain.ICalculator;
 import local.arch.infrastructure.token.ITokenKey;
 
 public class Service implements IService, IStorageUsing, TokenManagerInjection {
-  
+
   ITokenKey usedManager;
   IStorage storage;
-
 
   @Override
   public String calculation(double a, double b) {
@@ -34,14 +32,6 @@ public class Service implements IService, IStorageUsing, TokenManagerInjection {
   public String check(String login, String password) {
     String token = this.usedManager.generateToken(login, password);
     return validateToken(token) ? token : "BAD";
-    
-    // if (login.equals(this.login) && password.equals(this.password)) {
-    //   System.out.println("OK");
-    //   //// проверка логина и отправка ок
-    //   return "ok";
-    // }
-
-    // return "";
   }
 
   @Override
@@ -50,19 +40,19 @@ public class Service implements IService, IStorageUsing, TokenManagerInjection {
   }
 
   @Override
-  public void injectTokenManager(ITokenKey manager){
-      this.usedManager = manager;
+  public void injectTokenManager(ITokenKey manager) {
+    this.usedManager = manager;
   }
 
-   @Override
-    public boolean validateToken(String token) {
-        Map<String, String> tokenInfo = this.usedManager.getTokenInfo(token);
+  @Override
+  public boolean validateToken(String token) {
+    Map<String, String> tokenInfo = this.usedManager.getTokenInfo(token);
 
-        return this.storage.findUser(tokenInfo.get("username"),tokenInfo.get("passwd"));
-    }
+    return this.storage.findUser(tokenInfo.get("username"), tokenInfo.get("passwd"));
+  }
 
-    @Override
-    public Map<String, String> getUserInfo(String token) {
-        return this.usedManager.getTokenInfo(token);
-    }
-} 
+  @Override
+  public Map<String, String> getUserInfo(String token) {
+    return this.usedManager.getTokenInfo(token);
+  }
+}
