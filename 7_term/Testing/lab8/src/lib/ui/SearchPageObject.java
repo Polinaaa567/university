@@ -104,6 +104,19 @@ public class SearchPageObject extends MainPageObject{
         );
     }
 
+    public void deleteElement() {
+        this.waitForElementAndClear(
+                By.xpath("The Hobbit"),
+                "Невозможно удалить элемент",
+                20
+        );
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     public void tapDeleteList() {
         this.waitForElementAndClick(
                 By.xpath(INIT_DELETE_LIST),
